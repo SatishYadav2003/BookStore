@@ -1,2 +1,2 @@
-# This is my first project(BookStore)
+# This is my project(BookStore)
 # yo yo bantai rapper
