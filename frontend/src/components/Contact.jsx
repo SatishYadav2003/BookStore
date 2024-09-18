@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Login from "./Login";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { useForm } from "react-hook-form";
-import Navbar from './Navbar'
+import Navbar from "./Navbar";
+import toast from "react-hot-toast";
 
 function Contact() {
   const {
@@ -11,13 +12,33 @@ function Contact() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
-  
+  const navigate = useNavigate();
+
+  const onSubmit = (data) => {
+    const userFeedbackData = {
+      name: data.name,
+      email: data.email,
+      message: data.message,
+    };
+
+    axios
+      .post("http://localhost:4000/contact", userFeedbackData)
+      .then((res) => {
+        if (res.status === 201) {
+          toast.success("Feedback sent successfully");
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        toast.error("Error:" + error.message);
+      });
+  };
+
   return (
     <>
       <div>
         <div className="hidden">
-          <Navbar/>
+          <Navbar />
         </div>
         <div className="flex h-screen justify-center items-center dark:text-black">
           <div className="modal-box">

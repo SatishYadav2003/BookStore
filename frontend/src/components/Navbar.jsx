@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-
+import Logout from "./Logout";
 import ThemeController from "./ThemeController";
 import Login from "./Login";
+import { useAuth } from "../context/AuthProvider";
 
 function Navbar() {
   const navItem = (
@@ -77,6 +78,8 @@ function Navbar() {
     document.getElementById("my_modal_3").showModal();
   };
 
+  const [authUser, setAuthUser] = useAuth();
+
   return (
     <div
       className={`max-w-screen-2xl font-bold container mx-auto md:px-20 px-4 sticky left-0 top-0 z-10 
@@ -124,19 +127,24 @@ function Navbar() {
               {navItem}
             </ul>
           </div>
-         
+
           <div>
             <ThemeController theme={theme} setThemeVal={setThemeVal} />
           </div>
-          <div>
-            <a
-              className="bg-black dark:bg-pink-500 dark:text-white   text-white rounded-md cursor-pointer duration-300 px-3 py-2 hover:bg-slate-800 "
-              onClick={popUp}
-            >
-              Login
-            </a>
-            <Login />
-          </div>
+
+          {authUser ? (
+            <Logout />
+          ) : (
+            <div>
+              <a
+                className="bg-black dark:bg-pink-500 dark:text-white   text-white rounded-md cursor-pointer duration-300 px-3 py-2 hover:bg-slate-800 "
+                onClick={popUp}
+              >
+                Login
+              </a>
+              <Login />
+            </div>
+          )}
         </div>
       </div>
     </div>

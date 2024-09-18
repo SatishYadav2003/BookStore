@@ -4,7 +4,7 @@ function Cards({ item, padder }) {
   return (
     <>
       <div
-        className={`md:p-6 m-3 md:hover:scale-105 duration-200 ${padder} md:mx-0 dark:bg-slate-900 dark:text-black`}
+        className={`md:p-6 m-3 md:hover:scale-105 duration-200 ${padder} md:mx-0  dark:text-black`}
       >
         <div className="card w-90 md:w-96 bg-fuchsia-100 shadow-md md:shadow-xl">
           <figure>

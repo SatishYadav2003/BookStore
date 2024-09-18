@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 function Signup() {
   const {
@@ -15,8 +16,9 @@ function Signup() {
     document.getElementById("my_modal_3").showModal();
   };
 
-  const onSubmit = (data) => {
+  const navigate = useNavigate();
 
+  const onSubmit = (data) => {
     const storeData = {
       nameSiteWala: data.text,
       contactSiteWala: data.tel,
@@ -24,21 +26,20 @@ function Signup() {
       passwordSiteWala: data.password,
     };
 
-    axios.post("http://localhost:4000/user/signup",storeData)
-    .then((res)=>{
-      console.log(res.data)
-      if(res.data)
-      {
-        alert("Login successfully")
-      }
-    })
-    .catch((error)=>{
+    axios
+      .post("http://localhost:4000/user/signup", storeData)
+      .then((res) => {
+        if (res.data) {
+          toast.success("SignUp successfull");
+        }
 
-      if(error.response)
-      {
-        alert("Error: "+error.response.data.message)
-      }
-    })
+        navigate("/");
+      })
+      .catch((error) => {
+        if (error.response) {
+          toast.error("Error: " + error.response.data.message);
+        }
+      });
   };
 
   return (
@@ -127,11 +128,11 @@ function Signup() {
                       Login
                     </a>
                   </p>
-                  <Login />
                 </div>
               </div>
             </div>
           </form>
+          <Login />
         </div>
       </div>
     </>

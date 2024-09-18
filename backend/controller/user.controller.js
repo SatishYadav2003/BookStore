@@ -26,7 +26,7 @@ export const userSignUp= async (req,res)=>{
         })
 
        await newUSer.save();
-        res.status(201).json({message:'User created successfully'});
+        res.status(201).json({message:'User created successfully',email:emailSiteWala});
 
 
     } catch (error) {
@@ -54,9 +54,7 @@ export const userLogin= async (req,res)=>{
         }
 
         res.status(201).json({message:'User validated Successfully',userData:{
-            name:dbEmailBaseHistory.name,
             email:dbEmailBaseHistory.email,
-            contact:dbEmailBaseHistory.contact
         }});
 
 

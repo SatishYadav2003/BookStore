@@ -3,6 +3,8 @@ import dotenv from "dotenv"
 import mongoose from "mongoose";
 import bookRoute from "./route/book.route.js"
 import userRoute from "./route/user.route.js"
+import userFeedbackRoute from "./route/feedback.route.js";
+import subscriberRoute from "./route/subscriber.route.js"
 import cors from "cors"
 
 
@@ -36,6 +38,8 @@ catch (error) {
 
 app.use("/book", bookRoute);
 app.use("/user", userRoute);
+app.use("/contact",userFeedbackRoute)
+app.use("/subscribeAlert",subscriberRoute)
 
 
 app.listen(PORT, () => {
